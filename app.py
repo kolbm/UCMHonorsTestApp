@@ -42,8 +42,8 @@ section = st.sidebar.radio("Select a Topic", [
 
 if section == "Period & Frequency":
     st.header("Calculate Period and Frequency")
-    st.latex("T = \frac{t}{n}")
-    st.latex("f = \frac{1}{T}")
+    st.latex(r"T = \frac{t}{n}")
+    st.latex(r"f = \frac{1}{T}")
     rotations = st.number_input("Number of Rotations", min_value=1, step=1)
     time = st.number_input("Total Time (s)", min_value=1.0, step=0.1)
     if st.button("Calculate"):
@@ -53,8 +53,8 @@ if section == "Period & Frequency":
 
 elif section == "Angular & Tangential Velocity":
     st.header("Calculate Angular & Tangential Velocity")
-    st.latex("\omega = 2\pi f")
-    st.latex("v = r\omega")
+    st.latex(r"\omega = 2\pi f")
+    st.latex(r"v = r\omega")
     frequency = st.number_input("Frequency (Hz)", min_value=0.01, step=0.01)
     radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
     if st.button("Calculate"):
@@ -65,8 +65,8 @@ elif section == "Angular & Tangential Velocity":
 
 elif section == "Centripetal Acceleration & Force":
     st.header("Calculate Centripetal Acceleration & Force")
-    st.latex("a_c = \frac{v^2}{r}")
-    st.latex("F_c = ma_c")
+    st.latex(r"a_c = \frac{v^2}{r}")
+    st.latex(r"F_c = ma_c")
     velocity = st.number_input("Velocity (m/s)", min_value=0.01, step=0.01)
     radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
     mass = st.number_input("Mass (kg)", min_value=0.01, step=0.01)
@@ -80,14 +80,14 @@ elif section == "Flat & Banked Curve Motion":
     st.header("Calculate Maximum Speed on a Flat & Banked Curve")
     option = st.radio("Choose Calculation", ["Flat Curve", "Banked Curve"])
     if option == "Flat Curve":
-        st.latex("v_{max} = \sqrt{\mu g r}")
+        st.latex(r"v_{max} = \sqrt{\mu g r}")
         mu = st.number_input("Coefficient of Static Friction", min_value=0.01, step=0.01)
         radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
         if st.button("Calculate"):
             v_max = calculate_max_speed_flat_curve(mu, radius)
             st.write(f"**Maximum Speed (v_max):** {v_max:.3f} m/s")
     else:
-        st.latex("v = \sqrt{r g \tan(\theta)}")
+        st.latex(r"v = \sqrt{r g \tan(\theta)}")
         radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
         angle = st.number_input("Bank Angle (°)", min_value=0.01, step=0.01)
         if st.button("Calculate"):
