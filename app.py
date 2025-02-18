@@ -62,3 +62,34 @@ elif section == "Angular & Tangential Velocity":
         v = calculate_tangential_velocity(radius, omega)
         st.write(f"**Angular Velocity (ω):** {omega:.3f} rad/s")
         st.write(f"**Tangential Velocity (v):** {v:.3f} m/s")
+
+elif section == "Centripetal Acceleration & Force":
+    st.header("Calculate Centripetal Acceleration & Force")
+    st.latex(r"a_c = \frac{v^2}{r}")
+    st.latex(r"F_c = ma_c")
+    velocity = st.number_input("Velocity (m/s)", min_value=0.01, step=0.01)
+    radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
+    mass = st.number_input("Mass (kg)", min_value=0.01, step=0.01)
+    if st.button("Calculate"):
+        a_c = calculate_centripetal_acceleration(velocity, radius)
+        F_c = calculate_centripetal_force(mass, a_c)
+        st.write(f"**Centripetal Acceleration (a_c):** {a_c:.3f} m/s²")
+        st.write(f"**Centripetal Force (F_c):** {F_c:.3f} N")
+
+elif section == "Flat & Banked Curve Motion":
+    st.header("Calculate Maximum Speed on a Flat & Banked Curve")
+    option = st.radio("Choose Calculation", ["Flat Curve", "Banked Curve"])
+    if option == "Flat Curve":
+        st.latex(r"v_{max} = \sqrt{\mu g r}")
+        mu = st.number_input("Coefficient of Static Friction", min_value=0.01, step=0.01)
+        radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
+        if st.button("Calculate"):
+            v_max = calculate_max_speed_flat_curve(mu, radius)
+            st.write(f"**Maximum Speed (v_max):** {v_max:.3f} m/s")
+    else:
+        st.latex(r"v = \sqrt{r g \tan(\theta)}")
+        radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
+        angle = st.number_input("Bank Angle (°)", min_value=0.01, step=0.01)
+        if st.button("Calculate"):
+            v_safe = calculate_bank_angle_velocity(radius, angle)
+            st.write(f"**Safe Speed on Banked Curve:** {v_safe:.3f} m/s")
