@@ -40,10 +40,64 @@ section = st.sidebar.radio("Select a Topic", [
     "Apparent Weight on Hills & Dips"
 ])
 
-if section == "Apparent Weight on Hills & Dips":
+if section == "Period & Frequency":
+    st.header("Calculate Period and Frequency")
+    st.latex(r"T = \frac{t}{n}")
+    st.latex(r"f = \frac{1}{T}")
+    rotations = st.number_input("Number of Rotations", min_value=1, step=1)
+    time = st.number_input("Total Time (s)", min_value=1.0, step=0.1)
+    if st.button("Calculate"):
+        T, f = calculate_period_frequency(rotations, time)
+        st.write(f"**Period (T):** {T:.3f} s")
+        st.write(f"**Frequency (f):** {f:.3f} Hz")
+
+elif section == "Angular & Tangential Velocity":
+    st.header("Calculate Angular & Tangential Velocity")
+    st.latex(r"\omega = 2\pi f")
+    st.latex(r"v = r\omega")
+    frequency = st.number_input("Frequency (Hz)", min_value=0.01, step=0.01)
+    radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
+    if st.button("Calculate"):
+        omega = calculate_angular_velocity(frequency)
+        v = calculate_tangential_velocity(radius, omega)
+        st.write(f"**Angular Velocity (ω):** {omega:.3f} rad/s")
+        st.write(f"**Tangential Velocity (v):** {v:.3f} m/s")
+
+elif section == "Centripetal Acceleration & Force":
+    st.header("Calculate Centripetal Acceleration & Force")
+    st.latex(r"a_c = \frac{v^2}{r}")
+    st.latex(r"F_c = m a_c")
+    velocity = st.number_input("Velocity (m/s)", min_value=0.01, step=0.01)
+    radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
+    mass = st.number_input("Mass (kg)", min_value=0.01, step=0.01)
+    if st.button("Calculate"):
+        a_c = calculate_centripetal_acceleration(velocity, radius)
+        F_c = calculate_centripetal_force(mass, a_c)
+        st.write(f"**Centripetal Acceleration (a_c):** {a_c:.3f} m/s²")
+        st.write(f"**Centripetal Force (F_c):** {F_c:.3f} N")
+
+elif section == "Flat & Banked Curve Motion":
+    st.header("Calculate Maximum Speed on a Flat & Banked Curve")
+    option = st.radio("Choose Calculation", ["Flat Curve", "Banked Curve"])
+    if option == "Flat Curve":
+        st.latex(r"v_{max} = \sqrt{\mu g r}")
+        mu = st.number_input("Coefficient of Static Friction", min_value=0.01, step=0.01)
+        radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
+        if st.button("Calculate"):
+            v_max = calculate_max_speed_flat_curve(mu, radius)
+            st.write(f"**Maximum Speed (v_max):** {v_max:.3f} m/s")
+    else:
+        st.latex(r"v = \sqrt{r g \tan(\theta)}")
+        radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
+        angle = st.number_input("Bank Angle (°)", min_value=0.01, step=0.01)
+        if st.button("Calculate"):
+            v_safe = calculate_bank_angle_velocity(radius, angle)
+            st.write(f"**Safe Speed on Banked Curve:** {v_safe:.3f} m/s")
+
+elif section == "Apparent Weight on Hills & Dips":
     st.header("Calculate Apparent Weight on Hills & Dips")
-    st.latex(r"W_{top} = mg - rac{m v^2}{r}")
-    st.latex(r"W_{bottom} = mg + rac{m v^2}{r}")
+    st.latex(r"W_{top} = mg - \frac{m v^2}{r}")
+    st.latex(r"W_{bottom} = mg + \frac{m v^2}{r}")
     mass = st.number_input("Mass (kg)", min_value=0.01, step=0.01)
     velocity = st.number_input("Velocity (m/s)", min_value=0.01, step=0.01)
     radius = st.number_input("Radius (m)", min_value=0.01, step=0.01)
